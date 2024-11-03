@@ -77,7 +77,6 @@ export default function Navbar() {
       const timeElapsed = currentTime - start;
       const progress = Math.min(timeElapsed / duration, 1);
 
-      // Fonction d'easing cubique
       const ease = (t: number) => t < 0.5 
         ? 4 * t * t * t 
         : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
@@ -115,7 +114,6 @@ export default function Navbar() {
     const handleScroll = () => {
       setHasScrolled(window.scrollY > 20);
 
-      // Trouve la section la plus proche du haut de l'écran
       const sections = navItems.map(item => item.href.substring(1));
       let currentSection = sections[0];
       let minDistance = Infinity;
@@ -139,119 +137,121 @@ export default function Navbar() {
   }, []);
 
   return (
-    <motion.nav
-      style={{ backgroundColor: navbarBackground }}
-      className={cn(
-        "fixed w-full z-50 transition-all duration-300 overflow-hidden",
-        hasScrolled ? "backdrop-blur-md border-b border-white/10 shadow-lg shadow-black/5" : ""
-      )}
-    >
-      {/* Header de la navbar */}
-      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <motion.div
-            style={{ 
-              opacity: logoOpacity,
-              y: logoTranslateY,
-              scale: logoScale,
-            }}
-            variants={logoVariants}
-            whileHover="hover"
-            className="relative"
-          >
-            <Link 
-              href="#home"
-              className="text-xl font-bold relative group flex items-center gap-2"
-              onClick={(e) => handleNavClick(e, "#home")}
-            >
-              <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-violet-400 bg-clip-text text-transparent hover:from-blue-300 hover:via-purple-300 hover:to-violet-300 transition-all duration-300">
-                Achour Mezdad
-              </span>
-              <motion.div 
-                className="absolute -bottom-1 left-0 h-0.5 w-full bg-gradient-to-r from-blue-400 via-purple-400 to-violet-400"
-                initial={{ scaleX: 0 }}
-                whileHover={{ scaleX: 1 }}
-                transition={{ duration: 0.3 }}
-              />
-            </Link>
-          </motion.div>
-
-          {/* Navigation desktop */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
-              {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  onClick={(e) => handleNavClick(e, item.href)}
-                  className="relative group px-3 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors duration-300"
-                >
-                  <span className="relative z-10">{item.name}</span>
-                  <motion.span 
-                    className="absolute inset-0 rounded-md bg-gradient-to-r from-blue-500/0 via-purple-500/0 to-violet-500/0"
-                    whileHover={{
-                      backgroundColor: "rgba(59, 130, 246, 0.1)",
-                    }}
-                    transition={{ duration: 0.3 }}
-                  />
-                  <motion.span 
-                    className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-blue-400 via-purple-400 to-violet-400"
-                    initial={{ width: activeSection === item.href.substring(1) ? "100%" : "0%" }}
-                    animate={{ width: activeSection === item.href.substring(1) ? "100%" : "0%" }}
-                    whileHover={{ width: "100%" }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Bouton menu mobile */}
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-violet-500/20 focus:outline-none transition-all duration-300"
-            aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
-          >
-            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </motion.button>
-        </div>
-      </div>
-
-      {/* Menu mobile */}
-      <motion.div
-        initial="closed"
-        animate={isOpen ? "open" : "closed"}
-        variants={menuVariants}
-        className="md:hidden w-full overflow-hidden backdrop-blur-md border-t border-white/10"
+    <div className="fixed inset-x-0 top-0 z-50">
+      <motion.nav
+        style={{ backgroundColor: navbarBackground }}
+        className={cn(
+          "w-full transition-all duration-300",
+          hasScrolled ? "backdrop-blur-md border-b border-white/10 shadow-lg shadow-black/5" : ""
+        )}
       >
-        <div className="w-full px-4 pt-2 pb-3 space-y-1">
-          {navItems.map((item) => (
-            <button
-              key={item.name}
-              onClick={(e) => handleNavClick(e, item.href)}
-              className={cn(
-                "w-full flex items-center px-3 py-2 rounded-md text-base font-medium transition-all duration-300",
-                activeSection === item.href.substring(1)
-                  ? "text-white bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-violet-500/20"
-                  : "text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-blue-500/10 hover:via-purple-500/10 hover:to-violet-500/10"
-              )}
-              aria-current={activeSection === item.href.substring(1) ? "page" : undefined}
+        {/* Header de la navbar */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <motion.div
+              style={{ 
+                opacity: logoOpacity,
+                y: logoTranslateY,
+                scale: logoScale,
+              }}
+              variants={logoVariants}
+              whileHover="hover"
+              className="relative"
             >
-              <motion.div
-                initial={{ rotate: 0 }}
-                animate={{ rotate: activeSection === item.href.substring(1) ? 90 : 0 }}
-                transition={{ duration: 0.2 }}
+              <Link 
+                href="#home"
+                className="text-xl font-bold relative group flex items-center gap-2"
+                onClick={(e) => handleNavClick(e, "#home")}
               >
-                <ChevronRight className="w-4 h-4 mr-2" />
-              </motion.div>
-              {item.name}
-            </button>
-          ))}
+                <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-violet-400 bg-clip-text text-transparent hover:from-blue-300 hover:via-purple-300 hover:to-violet-300 transition-all duration-300">
+                  Achour Mezdad
+                </span>
+                <motion.div 
+                  className="absolute -bottom-1 left-0 h-0.5 w-full bg-gradient-to-r from-blue-400 via-purple-400 to-violet-400"
+                  initial={{ scaleX: 0 }}
+                  whileHover={{ scaleX: 1 }}
+                  transition={{ duration: 0.3 }}
+                />
+              </Link>
+            </motion.div>
+
+            {/* Navigation desktop */}
+            <div className="hidden md:block">
+              <div className="ml-10 flex items-baseline space-x-4">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    onClick={(e) => handleNavClick(e, item.href)}
+                    className="relative group px-3 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors duration-300"
+                  >
+                    <span className="relative z-10">{item.name}</span>
+                    <motion.span 
+                      className="absolute inset-0 rounded-md bg-gradient-to-r from-blue-500/0 via-purple-500/0 to-violet-500/0"
+                      whileHover={{
+                        backgroundColor: "rgba(59, 130, 246, 0.1)",
+                      }}
+                      transition={{ duration: 0.3 }}
+                    />
+                    <motion.span 
+                      className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-blue-400 via-purple-400 to-violet-400"
+                      initial={{ width: activeSection === item.href.substring(1) ? "100%" : "0%" }}
+                      animate={{ width: activeSection === item.href.substring(1) ? "100%" : "0%" }}
+                      whileHover={{ width: "100%" }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Bouton menu mobile */}
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setIsOpen(!isOpen)}
+              className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-violet-500/20 focus:outline-none transition-all duration-300"
+              aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
+            >
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </motion.button>
+          </div>
         </div>
-      </motion.div>
-    </motion.nav>
+
+        {/* Menu mobile */}
+        <motion.div
+          initial="closed"
+          animate={isOpen ? "open" : "closed"}
+          variants={menuVariants}
+          className="md:hidden backdrop-blur-md border-t border-white/10"
+        >
+          <div className="px-4 pt-2 pb-3 space-y-1">
+            {navItems.map((item) => (
+              <button
+                key={item.name}
+                onClick={(e) => handleNavClick(e, item.href)}
+                className={cn(
+                  "w-full flex items-center px-3 py-2 rounded-md text-base font-medium transition-all duration-300",
+                  activeSection === item.href.substring(1)
+                    ? "text-white bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-violet-500/20"
+                    : "text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-blue-500/10 hover:via-purple-500/10 hover:to-violet-500/10"
+                )}
+                aria-current={activeSection === item.href.substring(1) ? "page" : undefined}
+              >
+                <motion.div
+                  initial={{ rotate: 0 }}
+                  animate={{ rotate: activeSection === item.href.substring(1) ? 90 : 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <ChevronRight className="w-4 h-4 mr-2" />
+                </motion.div>
+                {item.name}
+              </button>
+            ))}
+          </div>
+        </motion.div>
+      </motion.nav>
+    </div>
   );
 }

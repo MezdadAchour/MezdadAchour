@@ -107,9 +107,9 @@ export default function Hero() {
   }, [controls]);
 
   const socialLinks = [
-    { icon: <Github className="w-6 h-6" />, href: "https://github.com/votre-username", label: "GitHub" },
-    { icon: <Linkedin className="w-6 h-6" />, href: "https://linkedin.com/in/votre-profile", label: "LinkedIn" },
-    { icon: <Mail className="w-6 h-6" />, href: "mailto:votre@email.com", label: "Email" }
+    { icon: <Github className="w-6 h-6" />, href: "https://github.com/MezdadAchour", label: "GitHub" },
+    { icon: <Linkedin className="w-6 h-6" />, href: "https://www.linkedin.com/in/achour-mezdad-b04526197/", label: "LinkedIn" },
+    { icon: <Mail className="w-6 h-6" />, href: "mailto:mezdad.achour@hotmail.fr", label: "Email" }
   ];
 
   return (

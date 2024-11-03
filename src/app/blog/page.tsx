@@ -6,19 +6,7 @@ import { Card } from '@/components/ui/card';
 import { Calendar, Clock, ArrowRight, Search } from 'lucide-react';
 import { useState } from 'react';
 import Link from 'next/link';
-
-const BLOG_POSTS = [
-  {
-    id: 'les-meilleures-pratiques-react-2024',
-    title: 'Les meilleures pratiques React en 2024',
-    excerpt: 'Découvrez les dernières tendances et meilleures pratiques pour développer des applications React modernes et performantes.',
-    date: '15 Oct 2024',
-    readTime: '5 min',
-    imageUrl: '/api/placeholder/800/400',
-    tags: ['React', 'JavaScript', 'Web Development']
-  },
-  // Ajoutez d'autres articles ici
-];
+import { BLOG_POSTS } from '@/data/blog-posts';
 
 const ALL_TAGS = ['React', 'JavaScript', 'Web Development', 'CSS', 'Tailwind', 'Design', 'Accessibilité', 'Web', 'UX'];
 

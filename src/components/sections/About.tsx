@@ -28,9 +28,9 @@ const timeline: TimelineItem[] = [
   {
     icon: Briefcase,
     title: "Ingénieur en Automatique",
-    place: "Stage professionnel",
+    place: "MFG",
     date: "6 mois",
-    description: "Application pratique des connaissances en automatisation industrielle",
+    description: "Conception, mise en œuvre et optimisation de systèmes automatisés",
     category: "Expérience",
     color: "from-purple-500 to-pink-600"
   },
@@ -38,7 +38,7 @@ const timeline: TimelineItem[] = [
     icon: Laptop,
     title: "Responsable Informatique & Développeur Web",
     place: "Entreprise",
-    date: "2020 - 2023",
+    date: "2022 - 2024",
     description: "Gestion du parc informatique, développement de solutions web et création d'applications internes",
     details: [
       "Maintenance du parc informatique et gestion des systèmes",
@@ -50,19 +50,19 @@ const timeline: TimelineItem[] = [
   },
   {
     icon: GraduationCap,
-    title: "Formation Fullstack JS",
+    title: "Web Development Essentials",
     place: "GOMYCODE",
     date: "2024",
-    description: "Développement web moderne avec React, Node.js et les technologies connexes",
+    description: "Formation intensive couvrant les bases du développement web, incluant HTML, CSS, JavaScript, gestion du DOM, intégration Fullstack et contrôle de version avec Git. Acquisition des compétences fondamentales pour construire des interfaces web interactives et modernes.",
     category: "Formation",
     color: "from-cyan-500 to-blue-600"
   },
   {
     icon: GraduationCap,
-    title: "Formation Web Mobile",
+    title: "Front End Developer - React JS Certified",
     place: "GOMYCODE",
     date: "2024",
-    description: "Spécialisation en développement d'applications web mobiles et responsive design",
+    description: "Certification en développement front-end avec React : composants, état, hooks, Redux, TypeScript, et Next.js. Formation axée sur les meilleures pratiques pour créer des applications web modernes.",
     category: "Formation",
     color: "from-emerald-500 to-teal-600"
   },
@@ -71,10 +71,10 @@ const timeline: TimelineItem[] = [
     title: "Développeur Web Freelance",
     place: "Indépendant",
     date: "2024 - Présent",
-    description: "Création de solutions web sur mesure pour divers clients",
+    description: "Développement de solutions web sur mesure pour divers clients, incluant des sites vitrines et des applications interactives, avec un focus sur l'optimisation, la performance, et le design responsive.",
     category: "Expérience",
     color: "from-violet-500 to-purple-600"
-  }
+}
 ];
 
 const containerAnimation = {

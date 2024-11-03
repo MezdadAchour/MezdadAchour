@@ -5,6 +5,7 @@ import { SectionTitle } from '../ui/section-title';
 import { Card } from '../ui/card';
 import { Calendar, Clock, ArrowRight, Tag, ChevronRight, BookOpen } from 'lucide-react';
 import { useRef, useState } from 'react';
+import { BLOG_POSTS } from '@/data/blog-posts';
 
 interface BlogPost {
   id: string;
@@ -16,39 +17,6 @@ interface BlogPost {
   tags: string[];
   category?: string;
 }
-
-const BLOG_POSTS: BlogPost[] = [
-  {
-    id: '1',
-    title: 'Les meilleures pratiques React en 2024',
-    excerpt: 'Découvrez les dernières tendances et meilleures pratiques pour développer des applications React modernes et performantes.',
-    date: '15 Oct 2024',
-    readTime: '5 min',
-    imageUrl: '/api/placeholder/800/400',
-    tags: ['React', 'JavaScript', 'Web Development'],
-    category: 'Frontend'
-  },
-  {
-    id: '2',
-    title: 'Introduction à Tailwind CSS',
-    excerpt: 'Un guide complet pour débuter avec Tailwind CSS et créer des interfaces utilisateur modernes.',
-    date: '12 Oct 2024',
-    readTime: '4 min',
-    imageUrl: '/api/placeholder/800/400',
-    tags: ['CSS', 'Tailwind', 'Design'],
-    category: 'CSS'
-  },
-  {
-    id: '3',
-    title: "L'importance de l'accessibilité web",
-    excerpt: 'Comment rendre vos applications web accessibles à tous les utilisateurs.',
-    date: '10 Oct 2024',
-    readTime: '6 min',
-    imageUrl: '/api/placeholder/800/400',
-    tags: ['Accessibilité', 'Web', 'UX'],
-    category: 'UX/UI'
-  }
-];
 
 const BlogCard = ({ post, index }: { post: BlogPost; index: number }) => {
   const cardRef = useRef<HTMLDivElement>(null);

@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card } from '@/components/ui/card';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import { 
   Code, 
   Github,
@@ -11,7 +12,8 @@ import {
   X,
   ChevronRight,
   Sparkles,
-  ArrowRight
+  ArrowRight,
+  ExternalLink
 } from 'lucide-react';
 
 interface Technology {
@@ -62,9 +64,9 @@ const projects: Project[] = [
       { name: "React Router" },
       { name: "Tailwind CSS" }
     ],
-    image: "/api/placeholder/800/600",
-    demoUrl: "https://fittrack-demo.com",
-    githubUrl: "https://github.com/username/fittrack",
+    image: "/images/fittrack.png",
+    demoUrl: "https://fittrack-m.netlify.app/",
+    githubUrl: "https://github.com/MezdadAchour/fittrack.git",
     gradient: "from-emerald-400 via-teal-500 to-cyan-600"
   },
   {
@@ -87,9 +89,9 @@ const projects: Project[] = [
       { name: "PHP" },
       { name: "MySQL" }
     ],
-    image: "/api/placeholder/800/600",
-    demoUrl: "https://edauto-demo.com",
-    githubUrl: "https://github.com/username/edauto",
+    image: "/images/EDAuto.png",
+    demoUrl: "https://edauto.netlify.app/",
+    githubUrl: "https://github.com/MezdadAchour/EDA.git",
     gradient: "from-purple-400 via-fuchsia-500 to-pink-600"
   },
   {
@@ -112,9 +114,9 @@ const projects: Project[] = [
       { name: "JWT" },
       { name: "Tailwind CSS" }
     ],
-    image: "/api/placeholder/800/600",
-    demoUrl: "https://sigma-demo.com",
-    githubUrl: "https://github.com/username/sigma",
+    image: "/images/sigmaredaction.png",
+    demoUrl: "https://sigma-redaction.netlify.app/",
+    githubUrl: "https://github.com/MezdadAchour/sigmaredactionnew.git",
     gradient: "from-blue-400 via-indigo-500 to-violet-600"
   }
 ];
@@ -127,7 +129,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center px-4"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6"
     >
       <motion.div
         initial={{ opacity: 0 }}
@@ -138,58 +140,81 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
       />
       
       <motion.div
-        initial={{ scale: 0.9, opacity: 0 }}
+        initial={{ scale: 0.95, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.9, opacity: 0 }}
-        className="relative w-full max-w-4xl bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl overflow-hidden border border-white/10"
+        exit={{ scale: 0.95, opacity: 0 }}
+        className="relative w-full max-w-3xl max-h-[85vh] bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl overflow-hidden border border-white/10 shadow-2xl"
       >
-        <div className="relative h-64 overflow-hidden">
-          <Image 
-            src={project.image} 
-            alt={project.title}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent" />
+        {/* En-tête fixe */}
+        <div className="sticky top-0 z-20 flex items-center justify-between p-4 bg-gray-900/90 backdrop-blur border-b border-white/10">
+          <h2 className="text-xl font-bold text-white">{project.title}</h2>
+          <div className="flex items-center gap-3">
+            <a
+              href={project.demoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-sm font-medium hover:from-blue-600 hover:to-indigo-700 transition-all"
+            >
+              <Globe className="w-4 h-4" />
+              <span>Site</span>
+            </a>
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 text-white text-sm font-medium hover:bg-white/20 transition-all border border-white/20"
+            >
+              <Github className="w-4 h-4" />
+              <span>GitHub</span>
+            </a>
+            <button
+              onClick={onClose}
+              className="p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+            >
+              <X className="w-5 h-5 text-white" />
+            </button>
+          </div>
         </div>
 
-        <div className="p-8 -mt-12 relative">
-          <button
-            onClick={onClose}
-            className="absolute right-4 top-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
-          >
-            <X className="w-5 h-5 text-white" />
-          </button>
+        {/* Zone de scroll personnalisée avec ScrollArea */}
+        <ScrollArea className="h-[calc(85vh-4rem)]">
+          <div className="relative h-48 md:h-64">
+            <Image 
+              src={project.image} 
+              alt={project.title}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent" />
+          </div>
 
-          <div className="space-y-6">
-            <div className="space-y-2">
-              <h2 className="text-3xl font-bold text-white">
-                {project.title}
-              </h2>
-              <p className="text-gray-300 leading-relaxed max-w-3xl">
-                {project.fullDescription}
-              </p>
-            </div>
+          <div className="px-6 md:px-8 py-6 space-y-8">
+            <p className="text-gray-300 leading-relaxed">
+              {project.fullDescription}
+            </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
+            <div className="space-y-6">
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold text-white flex items-center gap-2">
                   <Sparkles className="w-4 h-4 text-blue-400" />
                   Fonctionnalités
                 </h3>
-                <ul className="space-y-2">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {project.features.map((feature, index) => (
-                    <li key={index} className="flex items-center gap-2 text-gray-300">
-                      <ChevronRight className="w-4 h-4 text-blue-400" />
-                      {feature}
-                    </li>
+                    <div 
+                      key={index} 
+                      className="flex items-center gap-2 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                    >
+                      <ChevronRight className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                      <span className="text-gray-300 text-sm">{feature}</span>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
 
-              <div>
-                <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold text-white flex items-center gap-2">
                   <Code className="w-4 h-4 text-blue-400" />
                   Technologies
                 </h3>
@@ -197,7 +222,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                   {project.technologies.map((tech, index) => (
                     <span
                       key={index}
-                      className="px-3 py-1 rounded-full bg-white/10 text-gray-300 text-sm"
+                      className="px-3 py-1.5 rounded-full bg-white/10 text-gray-300 text-sm hover:bg-white/20 transition-colors"
                     >
                       {tech.name}
                     </span>
@@ -205,25 +230,8 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                 </div>
               </div>
             </div>
-
-            <div className="flex gap-4 pt-4">
-              <button
-                onClick={() => window.open(project.demoUrl, '_blank')}
-                className="flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-medium hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25"
-              >
-                <Globe className="w-4 h-4" />
-                Voir le Site
-              </button>
-              <button
-                onClick={() => window.open(project.githubUrl, '_blank')}
-                className="flex items-center gap-2 px-6 py-3 rounded-xl bg-white/10 text-white font-medium hover:bg-white/20 transition-all duration-300 transform hover:scale-105 border border-white/20"
-              >
-                <Github className="w-4 h-4" />
-                Code Source
-              </button>
-            </div>
           </div>
-        </div>
+        </ScrollArea>
       </motion.div>
     </motion.div>
   );
@@ -232,11 +240,11 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => (
   <motion.div
     whileHover={{ y: -5 }}
-    className="group cursor-pointer"
+    className="group cursor-pointer h-full"
     onClick={onClick}
   >
-    <Card className="relative h-full overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800 border-white/5">
-      <div className="relative h-48 overflow-hidden">
+    <Card className="relative flex flex-col h-[450px] bg-gradient-to-br from-gray-900 to-gray-800 border-white/5">
+      <div className="relative h-52 overflow-hidden">
         <Image 
           src={project.image} 
           alt={project.title}
@@ -247,8 +255,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => (
         <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent" />
       </div>
       
-      <div className="relative p-6 space-y-4">
-        <div className="flex items-center justify-between">
+      <div className="relative flex flex-col flex-grow p-6">
+        <div className="flex items-center justify-between mb-4">
           <h3 className="text-xl font-bold text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-blue-400 transition-all">
             {project.title}
           </h3>
@@ -260,12 +268,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => (
           </motion.div>
         </div>
         
-        <p className="text-gray-400 line-clamp-3">
+        <p className="text-gray-400 flex-grow line-clamp-4">
           {project.shortDescription}
         </p>
 
-        <div className="flex flex-wrap gap-2">
-          {project.technologies.slice(0, 4).map((tech, index) => (
+        <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-white/10">
+          {project.technologies.slice(0, 3).map((tech, index) => (
             <span
               key={index}
               className="text-xs px-2 py-1 rounded-full bg-white/5 text-gray-300"
@@ -273,9 +281,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => (
               {tech.name}
             </span>
           ))}
-          {project.technologies.length > 4 && (
+          {project.technologies.length > 3 && (
             <span className="text-xs px-2 py-1 rounded-full bg-white/5 text-gray-300">
-              +{project.technologies.length - 4}
+              +{project.technologies.length - 3}
             </span>
           )}
         </div>
@@ -356,3 +364,4 @@ const Projects: React.FC = () => {
 };
 
 export default Projects;
+

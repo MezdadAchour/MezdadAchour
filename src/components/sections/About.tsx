@@ -1,11 +1,11 @@
 'use client';
 import React from 'react';
-import { motion } from 'framer-motion';
-import { GraduationCap, Code, Briefcase, Laptop } from 'lucide-react';
+import { motion, HTMLMotionProps } from 'framer-motion';
+import { GraduationCap, Code, Briefcase, Laptop, LucideIcon } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 
 interface TimelineItem {
-  icon: React.ComponentType;
+  icon: LucideIcon;
   title: string;
   place: string;
   date: string;
@@ -110,7 +110,6 @@ const TimelineCard: React.FC<TimelineCardProps> = ({ item }) => {
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.2 }}
     >
-      {/* Halo effect */}
       <div 
         className={`
           absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 
@@ -121,11 +120,10 @@ const TimelineCard: React.FC<TimelineCardProps> = ({ item }) => {
       
       <Card className="h-full p-6 rounded-2xl border-2 border-white/5 bg-white/5 backdrop-blur-sm hover:border-white/20 transition-all duration-300">
         <div className="space-y-4">
-          {/* Header */}
           <div className="flex items-start justify-between gap-4">
             <div className="flex items-center gap-3">
               <div className={`p-2.5 rounded-xl bg-gradient-to-br ${item.color} bg-opacity-20`}>
-                {React.createElement(item.icon, { className: "w-5 h-5 text-white" })}
+                <item.icon className="w-5 h-5 text-white" />
               </div>
               <span className="text-sm font-medium text-white/80 bg-white/5 px-3 py-1 rounded-full">
                 {item.category}
@@ -136,7 +134,6 @@ const TimelineCard: React.FC<TimelineCardProps> = ({ item }) => {
             </span>
           </div>
 
-          {/* Content */}
           <div className="space-y-2">
             <h3 className="text-lg font-bold text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-blue-400 transition-all duration-300">
               {item.title}
@@ -169,10 +166,9 @@ const TimelineCard: React.FC<TimelineCardProps> = ({ item }) => {
   );
 };
 
-export default function About() {
+const About: React.FC = () => {
   return (
     <section id="about" className="relative min-h-screen pt-24 pb-16 overflow-hidden">
-      {/* Background avec effet parallax */}
       <motion.div 
         className="absolute inset-0 bg-[#0A0F1C]"
         style={{
@@ -194,7 +190,6 @@ export default function About() {
       </motion.div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header avec animation améliorée */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -224,7 +219,6 @@ export default function About() {
           />
         </motion.div>
 
-        {/* Timeline Grid avec effet de parallaxe */}
         <motion.div
           variants={containerAnimation}
           initial="hidden"
@@ -237,7 +231,6 @@ export default function About() {
           ))}
         </motion.div>
 
-        {/* Vision Section avec animations améliorées */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -274,4 +267,6 @@ export default function About() {
       </div>
     </section>
   );
-}
+};
+
+export default About;

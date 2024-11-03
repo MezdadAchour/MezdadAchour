@@ -2,26 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@layer base {
+  :root {
+    --background: 222.2 84% 4.9%; /* Variable CSS pour le fond */
+    --foreground: 210 40% 98%; /* Variable CSS pour le texte */
+  }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: hsl(var(--background)); /* Utilisation de la variable CSS */
+  color: hsl(var(--foreground)); /* Utilisation de la variable CSS */
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+::selection {
+  @apply bg-blue-500/30;
+}
+
+.glass {
+  @apply bg-white/10 backdrop-blur-md border border-white/20 rounded-xl;
+}
+
+.cursor {
+  transition: transform 150ms ease;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.cursor-hovering {
+  scale: 1.5;
+}
+
+.cursor-clicking {
+  background-color: #3b82f6; /* Changement de couleur en bleu lors du clic */
 }

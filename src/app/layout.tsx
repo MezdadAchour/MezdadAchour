@@ -12,13 +12,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="fr" className="scroll-smooth">
       <body
         className={cn(
-          'min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-black text-gray-100 overflow-x-hidden',
+          'min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-black text-gray-100',
           inter.variable,
           'font-sans antialiased'
         )}
       >
         <Providers>
-          <div className="relative">
+          {/* Wrapper pour gérer le overflow */}
+          <div className="relative w-full overflow-x-hidden">
             {/* Background pattern */}
             <div 
               className="fixed inset-0 bg-[url(/grid.svg)] bg-center opacity-20 pointer-events-none"
@@ -29,10 +30,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             />
             
             {/* Main content */}
-            <div className="relative">
+            <main className="relative w-full">
               {children}
               <ScrollToTop />
-            </div>
+            </main>
           </div>
         </Providers>
       </body>

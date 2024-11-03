@@ -208,7 +208,8 @@ export default function AdminDashboard() {
           <div className="flex gap-2">
             <select
               value={selectedFilter}
-              onChange={(e) => setSelectedFilter(e.target.value as any)}
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => 
+                setSelectedFilter(e.target.value as 'all' | 'today' | 'week' | 'month')}
               className="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white"
             >
               <option value="all">Tous</option>

@@ -2,9 +2,23 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code2, Wrench, Braces, Terminal, Star, CloudCog } from 'lucide-react';
+import { Code2, Wrench, Braces, Terminal, Star, CloudCog, LucideIcon } from 'lucide-react';
 
-const skillCategories = [
+interface Skill {
+  name: string;
+  level: 'Expert' | 'Avancé';
+  icon: LucideIcon;
+}
+
+interface SkillCategory {
+  title: string;
+  icon: LucideIcon;
+  color: string;
+  description: string;
+  skills: Skill[];
+}
+
+const skillCategories: SkillCategory[] = [
   {
     title: "Frontend",
     icon: Code2,
@@ -37,8 +51,15 @@ const skillCategories = [
   }
 ];
 
-const SkillCard = ({ name, level, delay = 0, icon: SkillIcon }) => {
-  const levelColors = {
+interface SkillCardProps {
+  name: string;
+  level: 'Expert' | 'Avancé';
+  delay?: number;
+  icon: LucideIcon;
+}
+
+const SkillCard: React.FC<SkillCardProps> = ({ name, level, delay = 0, icon: SkillIcon }) => {
+  const levelColors: Record<'Expert' | 'Avancé', string> = {
     Expert: "text-emerald-400",
     Avancé: "text-blue-400"
   };
@@ -50,10 +71,8 @@ const SkillCard = ({ name, level, delay = 0, icon: SkillIcon }) => {
       transition={{ duration: 0.5, delay }}
       className="relative group"
     >
-      {/* Effet de brillance au hover */}
       <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-75 blur-lg transition-all duration-500 group-hover:duration-200 animate-tilt"></div>
       
-      {/* Carte principale */}
       <div className="relative h-full bg-gray-900 rounded-lg p-6 flex flex-col transform transition-all duration-300 group-hover:scale-[1.02] group-hover:-translate-y-1 border border-gray-800 group-hover:border-gray-700">
         <div className="flex items-center justify-between mb-4">
           <div className="p-2 rounded-lg bg-gray-800 group-hover:bg-gray-750 transition-colors duration-300">
@@ -68,7 +87,6 @@ const SkillCard = ({ name, level, delay = 0, icon: SkillIcon }) => {
           {name}
         </h4>
         
-        {/* Indicateur visuel de niveau */}
         <div className="flex items-center mt-auto space-x-1">
           {[...Array(level === "Expert" ? 5 : 4)].map((_, i) => (
             <Star
@@ -87,7 +105,12 @@ const SkillCard = ({ name, level, delay = 0, icon: SkillIcon }) => {
   );
 };
 
-const CategorySection = ({ category, index }) => (
+interface CategorySectionProps {
+  category: SkillCategory;
+  index: number;
+}
+
+const CategorySection: React.FC<CategorySectionProps> = ({ category, index }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -119,9 +142,8 @@ const CategorySection = ({ category, index }) => (
   </motion.div>
 );
 
-const BackgroundDecorations = () => (
+const BackgroundDecorations: React.FC = () => (
   <>
-    {/* Motif de fond amélioré */}
     <div className="absolute inset-0 bg-[#020617]">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-500/5 to-transparent" />
       
@@ -143,14 +165,13 @@ const BackgroundDecorations = () => (
         <rect width="100%" height="100%" fill="url(#grid)" />
       </div>
       
-      {/* Effets de lumière améliorés */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-500/20 rounded-full filter blur-[120px] animate-pulse" />
       <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-purple-500/20 rounded-full filter blur-[120px] animate-pulse" />
     </div>
   </>
 );
 
-const FloatingIcons = () => (
+const FloatingIcons: React.FC = () => (
   <>
     <motion.div
       animate={{
@@ -184,7 +205,7 @@ const FloatingIcons = () => (
   </>
 );
 
-export default function Skills() {
+const Skills: React.FC = () => {
   return (
     <section id="skills" className="relative py-32 overflow-hidden">
       <BackgroundDecorations />
@@ -198,14 +219,14 @@ export default function Skills() {
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400">
-            Mes compétences
+              Mes compétences
             </span>
           </h2>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto">
             Technologies et outils que je maîtrise pour créer des expériences web exceptionnelles
           </p>
           
-        <motion.div
+          <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
@@ -213,7 +234,6 @@ export default function Skills() {
             className="mt-4 h-1 w-24 mx-auto bg-gradient-to-r from-blue-500 to-purple-600"
           />
         </motion.div>
-
 
         <div className="space-y-20">
           {skillCategories.map((category, index) => (
@@ -225,4 +245,6 @@ export default function Skills() {
       </div>
     </section>
   );
-}
+};
+
+export default Skills;

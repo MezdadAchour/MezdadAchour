@@ -1,8 +1,6 @@
 // src/app/api/contact/[id]/route.ts
 import { NextResponse } from 'next/server'
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
+import { prisma } from '@/lib/prisma'
 
 export async function PATCH(
     req: Request,
@@ -19,6 +17,7 @@ export async function PATCH(
 
         return NextResponse.json({ success: true, data: contact })
     } catch (error) {
+        console.error('Error updating contact:', error)
         return NextResponse.json(
             { success: false, error: 'Something went wrong' },
             { status: 500 }

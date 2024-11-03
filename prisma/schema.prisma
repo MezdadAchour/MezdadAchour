@@ -21,3 +21,13 @@ model Message {
   message   String
   createdAt DateTime @default(now())
 }
+
+model Contact {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  message   String
+  status    String   @default("unread")
+  createdAt DateTime @default(now())
+}
+

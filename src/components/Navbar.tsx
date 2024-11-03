@@ -65,7 +65,7 @@ export default function Navbar() {
     ["rgba(17, 24, 39, 0)", "rgba(17, 24, 39, 0.9)"]
   );
 
-  // Fonction de scroll personnalisée
+  // Fonction de scroll personnalisée optimisée
   const smoothScroll = useCallback((targetPosition: number) => {
     const startPosition = window.pageYOffset;
     const distance = targetPosition - startPosition;
@@ -77,7 +77,6 @@ export default function Navbar() {
       const timeElapsed = currentTime - start;
       const progress = Math.min(timeElapsed / duration, 1);
 
-      // Fonction d'easing cubique
       const ease = (t: number) => t < 0.5 
         ? 4 * t * t * t 
         : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
@@ -92,7 +91,7 @@ export default function Navbar() {
     requestAnimationFrame(animation);
   }, []);
 
-  // Gestionnaire de navigation
+  // Gestionnaire de navigation optimisé
   const handleNavClick = useCallback((e: React.MouseEvent<HTMLElement>, href: string) => {
     e.preventDefault();
     const targetId = href.replace('#', '');
@@ -102,20 +101,23 @@ export default function Navbar() {
       const navbarHeight = document.querySelector('nav')?.offsetHeight || 64;
       const targetPosition = element.offsetTop - navbarHeight;
       
-      setIsOpen(false);
-      
-      setTimeout(() => {
+      // Si le menu mobile est ouvert, le fermer de manière asynchrone
+      if (isOpen) {
+        setIsOpen(false);
+        // Démarrer le scroll immédiatement
         smoothScroll(targetPosition);
-      }, 100);
+      } else {
+        // Si le menu n'est pas ouvert, scroll immédiatement
+        smoothScroll(targetPosition);
+      }
     }
-  }, [smoothScroll]);
+  }, [smoothScroll, isOpen]);
 
   // Détection de la section active
   useEffect(() => {
     const handleScroll = () => {
       setHasScrolled(window.scrollY > 20);
 
-      // Trouve la section la plus proche du haut de l'écran
       const sections = navItems.map(item => item.href.substring(1));
       let currentSection = sections[0];
       let minDistance = Infinity;

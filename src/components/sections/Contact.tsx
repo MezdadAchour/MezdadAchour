@@ -116,7 +116,7 @@ const ContactForm: React.FC = () => {
   };
 
   return (
-    <section className="relative min-h-screen py-24 overflow-hidden">
+    <section id="contact" className="relative min-h-screen pt-24 pb-16">
       {/* Background avec effet parallax et grid */}
       <div className="absolute inset-0 bg-gray-950">
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(56,189,248,0.07)_1px,transparent_1px),linear-gradient(0deg,rgba(56,189,248,0.07)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]" />

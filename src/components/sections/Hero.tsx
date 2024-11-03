@@ -26,6 +26,17 @@ interface FloatingIconProps {
   delay?: number;
 }
 
+interface GradientTextProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+const GradientText: React.FC<GradientTextProps> = ({ children, className }) => (
+  <span className={`bg-gradient-to-r from-blue-400 via-violet-400 to-purple-400 bg-clip-text text-transparent ${className || ''}`}>
+    {children}
+  </span>
+);
+
 const FloatingIcon: React.FC<FloatingIconProps> = ({ icon, className, delay = 0 }) => {
   return (
     <motion.div
@@ -47,12 +58,6 @@ const FloatingIcon: React.FC<FloatingIconProps> = ({ icon, className, delay = 0 
     </motion.div>
   );
 };
-
-const GradientText: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <span className="bg-gradient-to-r from-blue-400 via-violet-400 to-purple-400 bg-clip-text text-transparent">
-    {children}
-  </span>
-);
 
 export default function Hero() {
   const mouseX = useMotionValue(0);

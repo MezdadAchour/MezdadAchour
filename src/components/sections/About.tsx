@@ -4,7 +4,18 @@ import { motion } from 'framer-motion';
 import { GraduationCap, Code, Briefcase, Laptop } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 
-const timeline = [
+interface TimelineItem {
+  icon: React.ComponentType;
+  title: string;
+  place: string;
+  date: string;
+  description: string;
+  category: string;
+  color: string;
+  details?: string[];
+}
+
+const timeline: TimelineItem[] = [
   {
     icon: GraduationCap,
     title: "Master en Automatique et Informatique",
@@ -87,7 +98,11 @@ const itemAnimation = {
   }
 };
 
-const TimelineCard = ({ item }) => {
+interface TimelineCardProps {
+  item: TimelineItem;
+}
+
+const TimelineCard: React.FC<TimelineCardProps> = ({ item }) => {
   return (
     <motion.div
       variants={itemAnimation}
@@ -110,7 +125,7 @@ const TimelineCard = ({ item }) => {
           <div className="flex items-start justify-between gap-4">
             <div className="flex items-center gap-3">
               <div className={`p-2.5 rounded-xl bg-gradient-to-br ${item.color} bg-opacity-20`}>
-                <item.icon className="w-5 h-5 text-white" />
+                {React.createElement(item.icon, { className: "w-5 h-5 text-white" })}
               </div>
               <span className="text-sm font-medium text-white/80 bg-white/5 px-3 py-1 rounded-full">
                 {item.category}
@@ -139,7 +154,7 @@ const TimelineCard = ({ item }) => {
                 animate={{ opacity: 1 }}
                 className="mt-3 space-y-2"
               >
-                {item.details.map((detail, idx) => (
+                {item.details.map((detail: string, idx: number) => (
                   <li key={idx} className="flex items-start gap-2 text-sm text-white/70">
                     <span className="mt-1.5 w-1 h-1 rounded-full bg-white/50" />
                     {detail}

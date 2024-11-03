@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { motion } from 'framer-motion';
-import { GraduationCap, Code, Briefcase, Laptop, ExternalLink } from 'lucide-react';
+import { GraduationCap, Code, Briefcase, Laptop } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 
 const timeline = [
@@ -197,7 +197,7 @@ export default function About() {
           </motion.h2>
           <p className="mt-4 text-blue-200/80 max-w-2xl mx-auto">
             Une évolution professionnelle marquée par la passion du développement
-            et l'innovation technologique
+            et l&apos;innovation technologique
           </p>
 
           <motion.div
@@ -239,9 +239,9 @@ export default function About() {
               Ma Vision
             </motion.h3>
             <p className="text-blue-200 leading-relaxed">
-              Passionné par le développement web et fort d'une expérience en automatique,
+              Passionné par le développement web et fort d&apos;une expérience en automatique,
               je combine expertise technique et créativité pour créer des solutions numériques
-              innovantes. Mon approche unique me permet d'apporter une vision globale aux projets,
+              innovantes. Mon approche unique me permet d&apos;apporter une vision globale aux projets,
               en alliant performance technique et expérience utilisateur optimale.
             </p>
             <motion.div 

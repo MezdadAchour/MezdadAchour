@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react';
-import { motion, useMotionValue, useSpring, useTransform, MotionValue } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 import { 
   Mail, 
@@ -13,10 +13,7 @@ import {
   Linkedin,
   Facebook,
   Instagram,
-  Phone,
-  ExternalLink,
   Sparkles,
-  MessageCircle,
   PhoneCall
 } from 'lucide-react';
 
@@ -89,12 +86,6 @@ const ContactForm: React.FC = () => {
   
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    mouseX.set(e.clientX - rect.left);
-    mouseY.set(e.clientY - rect.top);
-  };
 
   const springConfig = { damping: 25, stiffness: 150 };
   const x = useSpring(mouseX, springConfig);

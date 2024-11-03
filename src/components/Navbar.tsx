@@ -61,12 +61,6 @@ export default function Navbar() {
     ["rgba(17, 24, 39, 0)", "rgba(17, 24, 39, 0.9)"]
   );
 
-  const navbarBlur = useTransform(
-    scrollY,
-    [0, 100],
-    ["blur(0px)", "blur(8px)"]
-  );
-
   useEffect(() => {
     const handleScroll = () => {
       setHasScrolled(window.scrollY > 20);

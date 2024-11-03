@@ -55,7 +55,6 @@ const GradientText: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 );
 
 export default function Hero() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const { scrollY } = useScroll();
@@ -88,7 +87,6 @@ export default function Hero() {
       
       mouseX.set(normalizedX);
       mouseY.set(normalizedY);
-      setMousePosition({ x: normalizedX, y: normalizedY });
     };
 
     window.addEventListener('mousemove', handleMouseMove);
@@ -203,8 +201,8 @@ export default function Hero() {
             transition={{ delay: 0.6, duration: 0.8 }}
             className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-12"
           >
-            Développeur Front-end React passionné par la création d'expériences web
-            modernes et interactives. Spécialisé dans la construction d'interfaces
+            Développeur Front-end React passionné par la création d&apos;expériences web
+            modernes et interactives. Spécialisé dans la construction d&apos;interfaces
             utilisateur performantes et accessibles.
           </motion.p>
 

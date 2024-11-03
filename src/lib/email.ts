@@ -3,16 +3,16 @@ import { Resend } from 'resend';
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendNewMessageNotification(message: {
-    name: string;
-    email: string;
-    message: string;
+  name: string;
+  email: string;
+  message: string;
 }) {
-    try {
-        const { data } = await resend.emails.send({
-            from: 'Message portefolio <onboarding@resend.dev>',
-            to: process.env.ADMIN_EMAIL!,
-            subject: `✨ Nouveau message de ${message.name}`,
-            html: `
+  try {
+    const { data } = await resend.emails.send({
+      from: 'Message portefolio <onboarding@resend.dev>',
+      to: process.env.ADMIN_EMAIL!,
+      subject: `✨ Nouveau message de ${message.name}`,
+      html: `
         <!DOCTYPE html>
         <html>
           <head>
@@ -79,10 +79,10 @@ export async function sendNewMessageNotification(message: {
           </body>
         </html>
       `
-        });
-    } catch (error) {
-        console.error('Erreur d\'envoi d\'email:', error);
-        throw error;
-    }
+    });
+  } catch (error) {
+    console.error('Erreur d\'envoi d\'email:', error);
+    throw error;
+  }
 };
 

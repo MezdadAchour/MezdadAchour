@@ -6,12 +6,10 @@ import { Input } from '@/components/ui/input'
 import { signOut } from 'next-auth/react'
 import { 
   Search,
-  LogOut, 
-  Mail, 
+  LogOut,
   Calendar,
   Trash2,
   Download,
-  Filter,
   MessageCircle,
   Users,
   BarChart2
@@ -163,7 +161,7 @@ export default function AdminDashboard() {
                 <Calendar className="w-6 h-6 text-green-400" />
               </div>
               <div>
-                <p className="text-sm text-white/60">Aujourd'hui</p>
+                <p className="text-sm text-white/60">Aujourd&apos;hui</p>
                 <p className="text-2xl font-semibold text-white">{stats.today}</p>
               </div>
             </div>
@@ -214,7 +212,7 @@ export default function AdminDashboard() {
               className="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white"
             >
               <option value="all">Tous</option>
-              <option value="today">Aujourd'hui</option>
+              <option value="today">Aujourd&apos;hui</option>
               <option value="week">Cette semaine</option>
               <option value="month">Ce mois</option>
             </select>

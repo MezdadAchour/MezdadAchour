@@ -94,7 +94,7 @@ export default function NotificationSettings() {
           
           {saveStatus === 'error' && (
             <div className="text-red-400 text-sm">
-              Erreur lors de l'enregistrement
+              Erreur lors de l&apos;enregistrement
             </div>
           )}
         </div>

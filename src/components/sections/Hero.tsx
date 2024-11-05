@@ -206,10 +206,8 @@ export default function Hero() {
             transition={{ delay: 0.6, duration: 0.8 }}
             className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-12"
           >
-            Développeur Front-end React passionné par la création d&apos;expériences web
-            modernes et interactives. Spécialisé dans la construction d&apos;interfaces
-            utilisateur performantes et accessibles.
-          </motion.p>
+            Développeur web passionné par des designs élégants et performants pour des expériences web modernes et immersives
+            </motion.p>
 
           {/* Boutons d'action */}
           <motion.div

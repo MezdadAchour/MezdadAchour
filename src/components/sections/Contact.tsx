@@ -51,7 +51,7 @@ const socialLinks: SocialLink[] = [
   },
   { 
     icon: Facebook, 
-    href: "#", 
+    href: "https://www.facebook.com/mezdad.achour", 
     label: "Facebook",
     color: "from-sky-500 to-sky-700",
     hoverColor: "group-hover:from-sky-600 group-hover:to-sky-800",
@@ -59,7 +59,7 @@ const socialLinks: SocialLink[] = [
   },
   { 
     icon: Instagram, 
-    href: "#", 
+    href: "https://www.instagram.com/ach0_u/", 
     label: "Instagram",
     color: "from-pink-500 to-rose-500",
     hoverColor: "group-hover:from-pink-600 group-hover:to-rose-600",

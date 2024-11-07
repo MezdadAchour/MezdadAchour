@@ -1,5 +1,4 @@
 'use client'
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Code2, Wrench, Braces, Terminal, Star, CloudCog, LucideIcon } from 'lucide-react';
@@ -20,33 +19,45 @@ interface SkillCategory {
 
 const skillCategories: SkillCategory[] = [
   {
-    title: "Frontend",
+    title: "Développement Front-end",
     icon: Code2,
-    color: "from-blue-500 to-cyan-500",
-    description: "Technologies pour créer des interfaces modernes et réactives",
+    color: "from-blue-600 to-cyan-500",
+    description: "Maîtrise des technologies web modernes pour créer des interfaces utilisateur interactives et performantes.",
     skills: [
-      { name: "HTML5", level: "Expert", icon: Code2 },
-      { name: "CSS3", level: "Expert", icon: Code2 },
-      { name: "JavaScript", level: "Expert", icon: Code2 },
-      { name: "TypeScript", level: "Avancé", icon: Code2 },
-      { name: "React", level: "Expert", icon: Code2 },
-      { name: "Next.js", level: "Avancé", icon: Code2 },
-      { name: "Tailwind CSS", level: "Expert", icon: Code2 }
+      { name: "React", level: "Expert", icon: Braces },
+      { name: "JavaScript", level: "Expert", icon: Terminal },
+      { name: "TypeScript", level: "Avancé", icon: Terminal },
+      { name: "CSS/SCSS", level: "Expert", icon: Code2 },
+      { name: "Tailwind CSS", level: "Avancé", icon: Wrench },
+      { name: "Responsive Design", level: "Expert", icon: CloudCog }
     ]
   },
   {
-    title: "Outils & Technologies",
-    icon: Wrench,
-    color: "from-purple-500 to-pink-500",
-    description: "Outils et technologies pour un développement efficace",
+    title: "Développement Back-end",
+    icon: Braces,
+    color: "from-green-600 to-lime-500", 
+    description: "Maîtrise des langages et frameworks pour construire des API robustes et évolutives.",
     skills: [
-      { name: "Git", level: "Expert", icon: CloudCog },
-      { name: "GitHub", level: "Avancé", icon: CloudCog },
-      { name: "VS Code", level: "Expert", icon: Wrench },
-      { name: "npm", level: "Expert", icon: Wrench },
-      { name: "Redux", level: "Avancé", icon: Wrench },
-      { name: "React Router", level: "Expert", icon: Wrench },
-      { name: "Jest", level: "Avancé", icon: Wrench }
+      { name: "Node.js", level: "Expert", icon: Terminal },
+      { name: "Express", level: "Expert", icon: Braces },
+      { name: "MongoDB", level: "Avancé", icon: CloudCog },
+      { name: "PostgreSQL", level: "Avancé", icon: CloudCog },
+      { name: "REST API", level: "Expert", icon: Braces },
+      { name: "GraphQL", level: "Avancé", icon: Braces }
+    ]
+  },
+  {
+    title: "Outils et méthodologies",
+    icon: Wrench,
+    color: "from-orange-600 to-amber-500",
+    description: "Utilisation efficace des outils et des méthodologies pour une gestion de projet optimale.",
+    skills: [
+      { name: "Git/GitHub", level: "Expert", icon: Wrench },
+      { name: "Docker", level: "Avancé", icon: CloudCog },
+      { name: "Agile/Scrum", level: "Expert", icon: Wrench },
+      { name: "Figma", level: "Expert", icon: Wrench },
+      { name: "CI/CD", level: "Avancé", icon: CloudCog },
+      { name: "AWS/GCP", level: "Avancé", icon: CloudCog }
     ]
   }
 ];
@@ -69,7 +80,7 @@ const SkillCard: React.FC<SkillCardProps> = ({ name, level, delay = 0, icon: Ski
       initial={{ opacity: 0, scale: 0.95 }}
       whileInView={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, delay }}
-      className="relative group"
+      className="relative group sm:col-span-2 md:col-span-1"
     >
       <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-75 blur-lg transition-all duration-500 group-hover:duration-200 animate-tilt"></div>
       
@@ -142,68 +153,15 @@ const CategorySection: React.FC<CategorySectionProps> = ({ category, index }) =>
   </motion.div>
 );
 
-const BackgroundDecorations: React.FC = () => (
-  <>
-    <div className="absolute inset-0 bg-[#020617]">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-500/5 to-transparent" />
-      
-      <div className="absolute inset-0 opacity-[0.07]">
-        <pattern
-          id="grid"
-          width="40"
-          height="40"
-          patternUnits="userSpaceOnUse"
-          patternTransform="rotate(30)"
-        >
-          <path
-            d="M0 20h40M20 0v40"
-            stroke="currentColor"
-            strokeWidth="0.5"
-            fill="none"
-          />
-        </pattern>
-        <rect width="100%" height="100%" fill="url(#grid)" />
-      </div>
-      
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-500/20 rounded-full filter blur-[120px] animate-pulse" />
-      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-purple-500/20 rounded-full filter blur-[120px] animate-pulse" />
-    </div>
-  </>
-);
+const BackgroundDecorations: React.FC = () => {
+  // Décorations d'arrière-plan
+  return null;
+};
 
-const FloatingIcons: React.FC = () => (
-  <>
-    <motion.div
-      animate={{
-        y: [0, -20, 0],
-        rotate: [0, 10, 0]
-      }}
-      transition={{
-        duration: 5,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }}
-      className="absolute top-20 right-10 opacity-10"
-    >
-      <Braces className="w-20 h-20 text-blue-500" />
-    </motion.div>
-    
-    <motion.div
-      animate={{
-        y: [0, 20, 0],
-        rotate: [0, -10, 0]
-      }}
-      transition={{
-        duration: 4,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }}
-      className="absolute bottom-20 left-10 opacity-10"
-    >
-      <Terminal className="w-20 h-20 text-purple-500" />
-    </motion.div>
-  </>
-);
+const FloatingIcons: React.FC = () => {
+  // Icônes flottantes
+  return null;
+};
 
 const Skills: React.FC = () => {
   return (

@@ -22,9 +22,9 @@ export default function Home() {
       <Navbar />
       <Suspense fallback={<LoadingScreen />}>
         <Hero />
+        <Projects />
         <About />
         <Skills />
-        <Projects />
         <Blog />
         <Contact />
         <Footer />

@@ -1,7 +1,6 @@
-// src/components/Hero.tsx
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { 
   motion, 
   useMotionValue, 
@@ -26,23 +25,12 @@ interface FloatingIconProps {
   delay?: number;
 }
 
-interface GradientTextProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
-const GradientText: React.FC<GradientTextProps> = ({ children, className }) => (
-  <span className={`bg-gradient-to-r from-blue-400 via-violet-400 to-purple-400 bg-clip-text text-transparent ${className || ''}`}>
-    {children}
-  </span>
-);
-
 const FloatingIcon: React.FC<FloatingIconProps> = ({ icon, className, delay = 0 }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ 
-        opacity: 0.2,
+        opacity: 0.15,
         y: [0, -10, 0],
         rotate: [-5, 5, -5],
       }}
@@ -65,31 +53,25 @@ export default function Hero() {
   const { scrollY } = useScroll();
   const controls = useAnimation();
 
-  // Configuration des animations de spring
   const springConfig = { damping: 25, stiffness: 150 };
   const x = useSpring(mouseX, springConfig);
   const y = useSpring(mouseY, springConfig);
 
-  // Animations basées sur le scroll
   const nameOpacity = useTransform(scrollY, [0, 100], [1, 0]);
   const nameScale = useTransform(scrollY, [0, 100], [1, 0.8]);
   const nameTranslateY = useTransform(scrollY, [0, 100], [0, -50]);
 
-  // Animation des lumières d'ambiance
-  const light1X = useTransform(x, [0, 1000], [-100, 100]);
-  const light1Y = useTransform(y, [0, 1000], [-100, 100]);
-  const light2X = useTransform(x, [0, 1000], [100, -100]);
-  const light2Y = useTransform(y, [0, 1000], [100, -100]);
+  const light1X = useTransform(x, [0, 1000], [-50, 50]);
+  const light1Y = useTransform(y, [0, 1000], [-50, 50]);
+  const light2X = useTransform(x, [0, 1000], [50, -50]);
+  const light2Y = useTransform(y, [0, 1000], [50, -50]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       const { clientX, clientY } = e;
       const { innerWidth, innerHeight } = window;
-      
-      // Normaliser les coordonnées de la souris
       const normalizedX = (clientX / innerWidth) * 1000;
       const normalizedY = (clientY / innerHeight) * 1000;
-      
       mouseX.set(normalizedX);
       mouseY.set(normalizedY);
     };
@@ -98,12 +80,8 @@ export default function Hero() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [mouseX, mouseY]);
 
-  // Animation d'entrée séquentielle
   useEffect(() => {
-    const sequence = async () => {
-      await controls.start({ opacity: 1, y: 0 });
-    };
-    sequence();
+    controls.start({ opacity: 1, y: 0 });
   }, [controls]);
 
   const socialLinks = [
@@ -115,23 +93,23 @@ export default function Hero() {
   return (
     <section 
       id="home" 
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0A0A0F]"
     >
-      {/* Fond animé */}
-      <div className="absolute inset-0 bg-gray-950">
-        {/* Grille animée */}
+      {/* Fond amélioré */}
+      <div className="absolute inset-0">
+        {/* Grille plus subtile */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(56,189,248,0.07)_1px,transparent_1px),linear-gradient(0deg,rgba(56,189,248,0.07)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(0deg,rgba(59,130,246,0.03)_1px,transparent_1px)] bg-[size:3rem_3rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
         </div>
         
-        {/* Lumières d'ambiance */}
+        {/* Lumières d'ambiance améliorées */}
         <motion.div
           style={{ x: light1X, y: light1Y }}
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/30 rounded-full filter blur-[128px]"
+          className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full filter blur-[100px]"
         />
         <motion.div
           style={{ x: light2X, y: light2Y }}
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-violet-500/30 rounded-full filter blur-[128px]"
+          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-500/10 rounded-full filter blur-[100px]"
         />
       </div>
 
@@ -148,19 +126,19 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 mb-8 group hover:border-gray-600 transition-colors duration-300"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-950/30 border border-blue-800/30 mb-8 group hover:border-blue-700/50 transition-colors duration-300"
           >
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
             </span>
-            <span className="text-sm text-gray-300 group-hover:text-white transition-colors duration-300">
+            <span className="text-sm text-blue-200 group-hover:text-blue-100 transition-colors duration-300">
               Disponible pour des projets
             </span>
-            <Sparkles className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors duration-300" />
+            <Sparkles className="w-4 h-4 text-blue-400 group-hover:text-blue-300 transition-colors duration-300" />
           </motion.div>
 
-          {/* Titre principal avec animation par lettre */}
+          {/* Titre principal */}
           <div className="overflow-hidden mb-8">
             <motion.h1 
               initial={{ y: 100 }}
@@ -172,7 +150,7 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="block text-gray-300 mb-4"
+                className="block text-blue-100 mb-4"
               >
                 Bonjour, je suis
               </motion.span>
@@ -184,16 +162,14 @@ export default function Hero() {
                 }}
                 className="relative inline-block"
               >
-          <GradientText className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400">
-              Achour Mezdad
-            </span>
-          </GradientText>                
-          <motion.span
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-violet-400">
+                  Achour Mezdad
+                </span>
+                <motion.span
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: 1 }}
                   transition={{ delay: 0.8, duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
-                  className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-violet-500 to-purple-500 origin-left"
+                  className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-500 origin-left"
                 />
               </motion.span>
             </motion.h1>
@@ -204,10 +180,10 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
-            className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-12"
+            className="text-xl text-blue-200/80 max-w-3xl mx-auto leading-relaxed mb-12"
           >
             Développeur web passionné par des designs élégants et performants pour des expériences web modernes et immersives
-            </motion.p>
+          </motion.p>
 
           {/* Boutons d'action */}
           <motion.div
@@ -222,8 +198,8 @@ export default function Hero() {
               whileTap={{ scale: 0.95 }}
               className="group relative inline-flex items-center gap-2 px-8 py-4 rounded-full overflow-hidden"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-violet-500 to-purple-500" />
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-violet-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-500" />
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 opacity-0 group-hover:opacity-100 transition-opacity" />
               <span className="relative text-white font-medium">
                 Voir mes projets
               </span>
@@ -234,7 +210,7 @@ export default function Hero() {
               href="#contact"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gray-800/50 backdrop-blur-sm border border-gray-700 text-white font-medium hover:bg-gray-800 transition-all"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-blue-950/30 border border-blue-800/30 text-blue-100 font-medium hover:bg-blue-900/30 hover:border-blue-700/50 transition-all"
             >
               <Mail className="w-5 h-5" />
               Me contacter
@@ -259,10 +235,10 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1 + index * 0.1 }}
-                className="group p-3 rounded-full border border-gray-700 hover:border-blue-500 transition-colors duration-300"
+                className="group p-3 rounded-full border border-blue-800/30 hover:border-blue-500 bg-blue-950/30 transition-all duration-300"
                 aria-label={link.label}
               >
-                <div className="text-gray-400 group-hover:text-blue-400 transition-colors duration-300">
+                <div className="text-blue-400 group-hover:text-blue-300 transition-colors duration-300">
                   {link.icon}
                 </div>
               </motion.a>
@@ -273,12 +249,12 @@ export default function Hero() {
 
       {/* Éléments flottants */}
       <FloatingIcon 
-        icon={<Code2 size={48} />} 
+        icon={<Code2 className="text-blue-500/50" size={48} />} 
         className="absolute top-1/4 left-10" 
         delay={0.5}
       />
       <FloatingIcon 
-        icon={<Globe size={48} />} 
+        icon={<Globe className="text-indigo-500/50" size={48} />} 
         className="absolute bottom-1/4 right-10" 
         delay={0.8}
       />

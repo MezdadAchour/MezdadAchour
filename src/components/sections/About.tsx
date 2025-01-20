@@ -33,7 +33,7 @@ const timeline: TimelineItem[] = [
   {
     icon: Laptop,
     title: "Responsable Informatique & Développeur Web",
-    place: "Entreprise",
+    place: "EDA",
     date: "2022 - 2024",
     category: "Expérience",
     color: "from-rose-500 to-red-600"
